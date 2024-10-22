@@ -3,8 +3,8 @@
  * Template Name: Home Page
  *
  * @package WordPress
- * @subpackage Twenty_Fourteen
- * @since Twenty Fourteen 1.0
+ * @subpackage technoit
+ * @since technoit 1.0
  */
 // Include header
 get_header();
@@ -400,29 +400,6 @@ get_header();
 </div> -->
 <!--  End Counter Section  -->
 
-<!--  Clients Section  -->
-<div id="clients-am" class="clients-am section">
-  <div class="max-width-container">
-    <div class="clients-slider-am clients">
-      <div class="clients-wrapper flex-center">
-        <?php
-        if (have_rows('logos_slider')):
-          // Loop through rows.
-          while (have_rows('logos_slider')):
-            the_row();
-            ?>
-            <div class="clients-slide clients-img"><img src="<?php echo get_sub_field('logo_image'); ?>" alt=""></div>
-            <?php
-          endwhile;
-        endif;
-        ?>
-      </div>
-    </div>
-
-  </div>
-</div>
-<!-- End Clients Section -->
-
 <!--  Our Team Section  -->
 <section id="teams-am" class="teams-am teams-sections-bg">
   <div class="max-width-container">
@@ -465,6 +442,30 @@ get_header();
   </div>
 </section>
 <!-- End Our Team Section -->
+
+<!--  Clients Section  -->
+<div id="clients-am" class="clients-am section">
+  <div class="max-width-container">
+    <div class="clients-slider-am clients">
+      <div class="clients-wrapper flex-center">
+        <?php
+        if (have_rows('logos_slider')):
+          // Loop through rows.
+          while (have_rows('logos_slider')):
+            the_row();
+            ?>
+            <div class="clients-slide clients-img"><img src="<?php echo get_sub_field('logo_image'); ?>" alt=""></div>
+            <?php
+          endwhile;
+        endif;
+        ?>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- End Clients Section -->
+
 
 <!--  Frequently Asked Questions Section  -->
 <section id="faq-am" class="faq-am">

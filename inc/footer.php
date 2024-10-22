@@ -80,18 +80,16 @@
               </a>
             </div>
           </div>
-          <div class="footer-widget">
+          <div class="footer-widget" id="widget-subs-form">
             <div class="footer-widget-heading">
               <h3><?php echo get_theme_mod('footer-contact-newslatter-heading'); ?></h3>
             </div>
             <div class="footer-text footer-text-margin">
               <p><?php echo get_theme_mod('footer-contact-newslatter-text'); ?></p>
             </div>
-            <div class="subscribe-form">
-              <form action="#">
-                <input type="text" placeholder="Email Address">
-                <button><i class="bi bi-telegram"></i></button>
-              </form>
+            <div class="subscribe-form" id="subscribe-form">
+                <input name="email-subs" id="email-subs" type="email" placeholder="Email Address">
+                <button id="subscribe-btn" type="submit"><i class="bi bi-telegram"></i></button>
             </div>
           </div>
         </div>
@@ -108,4 +106,8 @@
     </div>
   </div>
 </footer>
+
+<a href="#" class="scroll-top-in-bottom-am">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
 

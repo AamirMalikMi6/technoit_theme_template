@@ -1,17 +1,22 @@
 <?php
+
 /**
  * Template Name: Single Blog Page
  *
  * @package WordPress
- * @subpackage Twenty_Fourteen
- * @since Twenty Fourteen 1.0
+ * @subpackage Technoit
+ * @since Technoit 1.0
  */
 // Include header
 get_header();
-include(TEMPLATEPATH . '/template-parts/Pages-Heros.php');
+include(get_template_directory() . '/template-parts/Pages-Heros.php');
 $author_name = get_the_author_meta('display_name', get_post_field('post_author', get_the_ID()));
+$post = get_queried_object();
+$postType = get_post_type_object(get_post_type($post));
 ?>
 
+
+<!-- single page template when click on posts permalinks  -->
 <section class="single-blog-page-am">
 
     <div class="blog-page-main-am max-width-container">
@@ -25,8 +30,7 @@ $author_name = get_the_author_meta('display_name', get_post_field('post_author',
                         <p class="post-author"><?php echo $author_name; ?></p>
                         <p class="post-sperator"> - </p>
                         <p class="post-date">
-                            <time
-                                datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date('M j, Y')); ?></time>
+                            <time><?php echo esc_html(get_the_date('M j, Y')); ?></time>
                         </p>
                     </div>
                 </div>
@@ -56,12 +60,13 @@ $author_name = get_the_author_meta('display_name', get_post_field('post_author',
             <div class="blog-page-inner-right">
                 <div class="blog-sidbar">
                     <div class="search-form">
-                        <form action="#">
+                        <!-- <form action="#">
                             <input type="text" placeholder="Search...">
                             <button><i class="bi bi-search"></i></button>
-                        </form>
+                        </form> -->
+                        <?php get_search_form(); ?>
                     </div>
-                    <div class="blog-imag-gallery-am">
+                    <!-- <div class="blog-imag-gallery-am">
                         <div class="blog-gal-img"><img
                                 src="<?php echo get_template_directory_uri(); ?>/assets/images/blog-1.jpg"
                                 class="blog-imgs" alt=""></div>
@@ -89,9 +94,9 @@ $author_name = get_the_author_meta('display_name', get_post_field('post_author',
                         <div class="blog-gal-img"><img
                                 src="<?php echo get_template_directory_uri(); ?>/assets/images/blog-1.jpg"
                                 class="blog-imgs" alt=""></div>
-                    </div>
+                    </div> -->
                     <hr />
-                    <h3>Top Posts</h3>
+                    <h3>Top <?php echo $postType->labels->name; ?></h3>
                     <ul>
                         <?php
                         // Custom query to fetch recent posts
@@ -117,31 +122,34 @@ $author_name = get_the_author_meta('display_name', get_post_field('post_author',
                     </ul>
 
                     <hr />
+                    <?php
+                    $current_post_type = get_post_type();
 
-                    <h3>Categories</h3>
+                    // Set the taxonomy based on the post type
+                    if ($current_post_type === 'post') {
+                        $taxonomy = 'category'; // Default taxonomy for 'post'
+                    } else {
+                        // For custom post types, get the custom taxonomy
+                        // Replace 'custom_taxonomy' with your actual custom taxonomy name
+                        $taxonomy = $current_post_type . '-category'; // Assuming custom taxonomy follows this pattern
+                    }
+
+                    // Get all terms (categories) for the determined taxonomy
+                    $categories = get_categories(array(
+                        'taxonomy' => $taxonomy,
+                        'hide_empty' => false, // Show categories even if they are empty
+                    ));
+                    ?>
+
+                    <h3><?php echo get_taxonomy( $taxonomy )->label;?></h3>
                     <ul>
                         <?php
-                        $current_post_type = get_post_type();
-
-                        // Set the taxonomy based on the post type
-                        if ($current_post_type === 'post') {
-                            $taxonomy = 'category'; // Default taxonomy for 'post'
-                        } else {
-                            // For custom post types, get the custom taxonomy
-                            // Replace 'custom_taxonomy' with your actual custom taxonomy name
-                            $taxonomy = $current_post_type . '-category'; // Assuming custom taxonomy follows this pattern
-                        }
-
-                        // Get all terms (categories) for the determined taxonomy
-                        $categories = get_categories(array(
-                            'taxonomy' => $taxonomy,
-                            'hide_empty' => false, // Show categories even if they are empty
-                        ));
                         //<?php echo esc_url(get_category_link($category->term_id));
                         // $categories = get_the_category(get_the_ID());
                         if (!empty($categories)) {
                             foreach ($categories as $category) { ?>
-                                <li><a href=""><i class="bi bi-arrow-right-circle-fill"></i>
+                                <li><a href="<?php echo esc_url(get_term_link($category)); ?>"><i
+                                            class="bi bi-arrow-right-circle-fill"></i>
                                         <?php echo esc_html($category->name); ?></a></li>
                             <?php }
                         } else {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // services post type 
 
@@ -10,7 +10,7 @@ function create_services_post_type()
     $labels = array(
         'name' => 'Services', // Plural name
         'singular_name' => 'service',   // Singular name
-        'add_new'            => 'Add New Service' // Add new item   // Singular name
+        'add_new' => 'Add New Service' // Add new item   // Singular name
     );
 
     /*
@@ -43,22 +43,44 @@ function create_services_post_type()
 
     register_post_type('service', $args); //Create a post type with the slug is ‘product’ and arguments in $args.
 
-        // register taxonomy
-        register_taxonomy(
-            'service-category',
-            'service',
-            array(
-                'hierarchical' => true,
-                'public'      => true,
-                'show_in_rest' => true,
-                'label' => 'Service Category',
-                'query_var' => true,
-                'rewrite' => array('slug' => 'service-category')
-            )
-        );
+    // register taxonomy
+    register_taxonomy(
+        'service-category',
+        'service',
+        array(
+            'hierarchical' => true,
+            'public' => true,
+            'show_in_rest' => true,
+            'label' => 'Service Categories',
+            'query_var' => true,
+            'rewrite' => array('slug' => 'service-category')
+        )
+    );
+    // $labels = array(
+    //     'name'              => _x('Genres', 'taxonomy general name', 'textdomain'),
+    //     'singular_name'     => _x('Genre', 'taxonomy singular name', 'textdomain'),
+    //     'search_items'      => __('Search Genres', 'textdomain'),
+    //     'all_items'         => __('All Genres', 'textdomain'),
+    //     'parent_item'       => __('Parent Genre', 'textdomain'),
+    //     'parent_item_colon' => __('Parent Genre:', 'textdomain'),
+    //     'edit_item'         => __('Edit Genre', 'textdomain'),
+    //     'update_item'       => __('Update Genre', 'textdomain'),
+    //     'add_new_item'      => __('Add New Genre', 'textdomain'),
+    //     'new_item_name'     => __('New Genre Name', 'textdomain'),
+    //     'menu_name'         => __('Genres', 'textdomain'),
+    // );
 
+    // $args = array(
+    //     'hierarchical'      => true, // Set to 'false' for non-hierarchical (like tags)
+    //     'labels'            => $labels,
+    //     'show_ui'           => true,
+    //     'show_admin_column' => true,
+    //     'query_var'         => true,
+    //     'rewrite'           => array('slug' => 'genre'),
+    // );
+
+    // register_taxonomy('genre', array('post'), $args);
 }
-add_action('init', 'create_services_post_type');
 // porfolio post type 
 
 function create_portfolio_post_type()
@@ -69,7 +91,7 @@ function create_portfolio_post_type()
     $labels = array(
         'name' => 'Portfolios', // Plural name
         'singular_name' => 'Portfolio',   // Singular name
-        'add_new'            => 'Add Portfolio' // Add new item   // Singular name
+        'add_new' => 'Add Portfolio' // Add new item   // Singular name
     );
 
     /*
@@ -103,20 +125,18 @@ function create_portfolio_post_type()
 
     register_post_type('portfolio', $args); //Create a post type with the slug is ‘product’ and arguments in $args.
 
-        // register taxonomy
-        register_taxonomy(
-            'portfolio-category',
-            'portfolio',
-            array(
-                'hierarchical' => true,
-                'label' => 'Mi6 Portfolio',
-                'query_var' => true,
-                'rewrite' => array('slug' => 'portfolio-category')
-            )
-        );
-
+    // register taxonomy
+    register_taxonomy(
+        'portfolio-category',
+        'portfolio',
+        array(
+            'hierarchical' => true,
+            'label' => 'Portfolio Categories',
+            'query_var' => true,
+            'rewrite' => array('slug' => 'portfolio-category')
+        )
+    );
 }
-add_action('init', 'create_portfolio_post_type');
 // our team custom post type 
 function create_ourteam_post_type()
 {
@@ -126,7 +146,7 @@ function create_ourteam_post_type()
     $labels = array(
         'name' => 'Our Teams', // Plural name
         'singular_name' => 'Our Team',   // Singular name
-        'add_new'            => 'Add Team Member' // Add new item
+        'add_new' => 'Add Team Member' // Add new item
     );
 
     /*
@@ -164,17 +184,12 @@ function create_ourteam_post_type()
         'our-team',
         array(
             'hierarchical' => true,
-            'label' => 'Team Category',
+            'label' => 'Team Categories',
             'query_var' => true,
             'rewrite' => array('slug' => 'our-team-category')
         )
     );
-
-
-
-
 }
-add_action('init', 'create_ourteam_post_type');
 
 
 //Faq post type
@@ -217,6 +232,8 @@ function create_faqs_post_type()
     );
 
     register_post_type('faq', $args); //Create a post type with the slug is ‘product’ and arguments in $args.
+    create_services_post_type();
+    create_portfolio_post_type();
+    create_ourteam_post_type();
 }
 add_action('init', 'create_faqs_post_type');
-

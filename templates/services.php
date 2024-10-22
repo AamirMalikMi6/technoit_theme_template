@@ -3,12 +3,12 @@
 * Template Name: Services Page
 *
 * @package WordPress
-* @subpackage Twenty_Fourteen
-* @since Twenty Fourteen 1.0
+* @subpackage technoit
+* @since technoit 1.0
 */
 // Include header
 get_header();
-include(TEMPLATEPATH . '/template-parts/Pages-Heros.php');
+include get_template_directory() . '/template-parts/Pages-Heros.php';
 ?>
 
 <div class="single-page">

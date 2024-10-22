@@ -10,5 +10,5 @@
 
 <body <?php echo body_class();?>>
 
-<?php include get_template_directory() . '/inc/header.php'; ?>
+<?php include get_template_directory() . '/inc/header-other.php'; ?>
   

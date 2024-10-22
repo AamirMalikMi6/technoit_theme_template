@@ -3,8 +3,8 @@
  * Template Name: Contact Page
  *
  * @package WordPress
- * @subpackage Twenty_Fourteen
- * @since Twenty Fourteen 1.0
+ * @subpackage technoit
+ * @since technoit 1.0
  */
 // Include header
 get_header();
@@ -21,7 +21,7 @@ include(TEMPLATEPATH . '/template-parts/Pages-Heros.php');
             <div class="contact-information-main">
               <div class="contact-information-inner">
                 <div class="single-contact-info-box">
-                <span><i class="bi bi-geo-alt-fill"></i></span> 
+                  <span><i class="bi bi-geo-alt-fill"></i></span>
                   <div class="contact-info">
                     <h6><?php echo get_field('address_heading', 'option'); ?></h6>
                     <p><?php echo get_field('address_details', 'option'); ?></p>
@@ -31,7 +31,7 @@ include(TEMPLATEPATH . '/template-parts/Pages-Heros.php');
 
               <div class="contact-information-inner">
                 <div class="single-contact-info-box">
-                <span><i class="bi bi-telephone"></i></span> 
+                  <span><i class="bi bi-telephone"></i></span>
                   <div class="contact-info">
                     <h6><?php echo get_field('phone_heading', 'option'); ?></h6>
                     <p><?php echo get_field('phone_details', 'option'); ?></p>
@@ -41,7 +41,7 @@ include(TEMPLATEPATH . '/template-parts/Pages-Heros.php');
 
               <div class="contact-information-inner">
                 <div class="single-contact-info-box">
-                <span><i class="bi bi-envelope-at"></i></span> 
+                  <span><i class="bi bi-envelope-at"></i></span>
                   <div class="contact-info">
                     <h6><?php echo get_field('email_heading', 'option'); ?></h6>
                     <p><?php echo get_field('email_details', 'option'); ?></p>
@@ -53,8 +53,10 @@ include(TEMPLATEPATH . '/template-parts/Pages-Heros.php');
         </div>
         <div class="contact-form-area">
           <div class="contact-form-box contact-form">
-            <form class="contact-form form" id="contact-form">
+            <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post" class="contact-form form"
+              id="contact-form">
               <!-- add name and email in one row then subject message and submit -->
+              <input type="hidden" name="action" value="custom_contact_form">
               <div class="form-name-email">
                 <input type="text" class="form-control" id="name" name="name" placeholder="Name*" required>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Email*" required>
@@ -66,6 +68,13 @@ include(TEMPLATEPATH . '/template-parts/Pages-Heros.php');
                 <button type="submit" class="btn btn-primary">Send Message</button>
               </div>
             </form>
+            <!-- Popup modal -->
+            <!-- <div id="contact-form-popup" class="contact-form-popup" style="display: none;">
+              <div class="form-popup-content">
+                <p id="form-popup-message"></p>
+                <button id="form-close-popup">Close</button>
+              </div>
+            </div> -->
           </div>
         </div>
       </div>
